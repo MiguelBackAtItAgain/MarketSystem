@@ -40,6 +40,8 @@ deft-challenge/
 │   │   ├── constants.py       # Defines database and inventory file paths
 │   │   ├── id_manager.py      # Handles ID management for transactions and items
 │   │   ├── utils.py           # General utility functions for path handling
+│   ├── tests/
+│   │   ├── test_main.py       # Contains automated tests to ensure everything is working correctly.
 │── inventory-sample.txt       # Sample inventory data, you can copy and paste it in the inventory.txt file
 │── requirements.txt           # Dependencies for automated tests using pytest
 │── README.md                  # Project documentation
