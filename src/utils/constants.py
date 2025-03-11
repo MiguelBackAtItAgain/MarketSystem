@@ -1,0 +1,5 @@
+ITEM_DB_PATH = 'db\\json\\items.json'
+USER_DB_PATH = 'db\\json\\users.json'
+TRANSACTIONS_STORE_PATH = 'db\\transactions\\'
+INVENTORY_DOC_PATH = 'inventory\\inventory.txt'
+ID_STORE_PATH = 'db\\id\\id_store.json'
