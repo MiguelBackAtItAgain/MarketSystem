@@ -18,11 +18,11 @@ deft-challenge/
 │── src/
 |   │── db/
 |   |   │── id/
-|   |   |   │── id_store.json      # It stores the last generated IDs for both items and users.
+|   |   |   │── id_store.json      # It stores the last generated IDs for both items and users
 |   |   │── json/
-|   |   |   │── items.json         # It stores all the items that are available in the inventory.txt file.
-|   |   |   │── users.json         # It stores the users that come to buy stuff in the store.
-|   |   |   │── transactions/          # It stores all of the bills that are generated at checkout.
+|   |   |   │── items.json         # It stores all the items that are available in the inventory.txt file
+|   |   |   │── users.json         # It stores the users that come to buy stuff in the store
+|   |   |   │── transactions/          # It stores all of the bills that are generated at checkout
 |       │── inventory/
 |   |   |   │── inventory.txt      # File where the information is pre-loaded for it to be added to the items.json file at runtime.  
 │   ├── main.py                # Main entry point of the application
@@ -41,7 +41,7 @@ deft-challenge/
 │   │   ├── id_manager.py      # Handles ID management for transactions and items
 │   │   ├── utils.py           # General utility functions for path handling
 │   ├── tests/
-│   │   ├── test_main.py       # Contains automated tests to ensure everything is working correctly.
+│   │   ├── test_main.py       # Contains automated tests to ensure everything is working correctly
 │── inventory-sample.txt       # Sample inventory data, you can copy and paste it in the inventory.txt file
 │── requirements.txt           # Dependencies for automated tests using pytest
 │── README.md                  # Project documentation
@@ -75,7 +75,7 @@ deft-challenge/
 2. Follow the on-screen menu prompts to interact with the system.
 
 ## Dependencies
-The project uses the following Python libraries:
+The project uses the following Python libraries, these are part of pytest for automated testing of the code:
 - `colorama` (Terminal text formatting)
 - `pytest` (Testing framework)
 - `pluggy`, `iniconfig`, `packaging` (Supporting dependencies)
