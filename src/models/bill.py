@@ -1,11 +1,11 @@
 from datetime import datetime
-from utils.id_manager import generate_id
+from utils.id_manager import GenerateID
 
 class Bill:
 
     def __init__(self, items: list, sub_total: float, tax: float,
                  total: float, cash_given: float, change: float, savings: float):
-        self.transaction_number = f"{generate_id("transaction_id"):06d}"
+        self.transaction_number = f"{GenerateID("transaction_id"):06d}"
         self.items = items  
         self.sub_total = sub_total
         self.tax = tax
@@ -15,7 +15,7 @@ class Bill:
         self.date = datetime.now().strftime("%m%d%Y")
         self.savings = savings
 
-    def getFormattedBill(self) -> dict:
+    def GetFormattedBill(self) -> dict:
         return { 
             "transaction_number": self.transaction_number,
             "date": self.date,

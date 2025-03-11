@@ -1,8 +1,8 @@
-from utils.id_manager import generate_id
+from utils.id_manager import GenerateID
 
 class Cart:
     def __init__(self, item_id: int, user_id: int):
-        self.id = generate_id("cart_id")
+        self.id = GenerateID("cart_id")
         self.item_id = item_id
         self.user_id = user_id
 

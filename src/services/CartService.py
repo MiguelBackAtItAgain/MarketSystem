@@ -9,27 +9,16 @@ class CartSingleton:
     _cart_items = {}  
 
     @classmethod
-    def _AddToCart(cls, item_id: int, user_id: int):
+    def AddToCart(cls, item_id: int, user_id: int):
         if item_id in cls._cart_items:
             print(f"item with ID {item_id} is already in the cart.")
             return
         else:
             print(f"Added item {item_id} to cart.")
         cls._cart_items[item_id] = user_id 
-        
-    @classmethod
-    def _RemoveItemFromInventory(cls, item_id: int):
-        items = ItemService.LoadItems()  # Load all items
-
-        if str(item_id) in items:
-            del items[str(item_id)]  # Delete the item from inventory
-            ItemService.SaveItems(items)  # Save the updated inventory
-            print(f"Item ID {item_id} removed from inventory.")
-        else:
-            print(f"Warning: Item ID {item_id} not found in inventory.")
 
     @classmethod
-    def _RemoveFromCart(cls, item_id: int):
+    def RemoveFromCart(cls, item_id: int):
         if item_id in cls._cart_items:
             del cls._cart_items[item_id]
             print(f"Removed item {item_id} from cart.")
@@ -37,17 +26,17 @@ class CartSingleton:
             print(f"Item {item_id} not found in cart.")
 
     @classmethod
-    def _ClearCart(cls):
+    def ClearCart(cls):
         cls._cart_items.clear()
         print("Cart cleared.")
 
     @classmethod
-    def _GetCartItems(cls):
+    def __GetCartItems(cls):
         return cls._cart_items 
 
     @classmethod
-    def _GetFormattedCart(cls):        
-        cart_items = cls._GetCartItems()
+    def GetFormattedCart(cls):        
+        cart_items = cls.__GetCartItems()
         if not cart_items:
             return "Cart is empty."
 
@@ -106,43 +95,9 @@ class CartSingleton:
         cart_summary += f"TOTAL: ${grand_total:.2f}\n"
 
         return cart_summary
- 
 
     @classmethod
-    def _GetTotalPrice(cls) -> str:
-        sub_total = 0.0
-        total_tax = 0.0
-
-        if not cls._cart_items:
-            return "Total: $0.00"
-
-        user_id = next(iter(cls._cart_items.values()))  
-        user_data = UserService.GetUserByID(user_id)
-
-        if not user_data:
-            print(f"Error: Could not retrieve data for user ID {user_id}")
-            return "Total: $0.00"
-
-        is_member = user_data["is_member"]
-
-        for item_id in cls._cart_items.keys():
-            item_data = ItemService.GetItemByID(item_id)
-
-            if not item_data:
-                print(f"Error: Could not retrieve data for item ID {item_id}")
-                continue
-
-            unit_price = item_data["member_price"] if is_member else item_data["reg_price"]
-            tax_status = item_data["tax_status"]
-
-            sub_total += unit_price
-            total_tax += sub_total * (0.065 if tax_status else 0)
-
-        grand_total = sub_total + total_tax
-        return f"Total: ${grand_total:.2f}"
-
-    @classmethod
-    def _GenerateBill(cls, cash_given: float) -> None:
+    def GenerateBill(cls, cash_given: float) -> None:
 
         if not cls._cart_items:
             print("Cart is empty. Cannot generate a bill.")
@@ -221,17 +176,17 @@ class CartSingleton:
         )
 
         cls.__SaveBillToFile(bill)
-        cls._ClearCart()
+        cls.ClearCart()
 
 
     @classmethod
     def __SaveBillToFile(cls, bill: Bill) -> None:
 
         file_name = f"transaction_{bill.transaction_number}_{bill.date}.txt"
-        current_date = Utils.get_current_date()
-        bill_data = bill.getFormattedBill()
+        current_date = Utils.GetCurrentDate()
+        bill_data = bill.GetFormattedBill()
 
-        with open(f"{Utils.get_abs_path(TRANSACTIONS_STORE_PATH)}\\{file_name}", "w") as file:
+        with open(f"{Utils.GetAbsPath(TRANSACTIONS_STORE_PATH)}\\{file_name}", "w") as file:
             file.write(f"{current_date}")
             file.write(f"\nTRANSACTION: {bill.transaction_number}")
             file.write("\n{:20} {:10} {:10} {:10}\n".format("ITEM", "QUANTITY", "UNIT PRICE", "TOTAL"))

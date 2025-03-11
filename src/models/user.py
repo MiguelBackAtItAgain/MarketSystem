@@ -6,5 +6,5 @@ class User:
         self.name = name
         self.is_member = is_member
 
-    def getFormattedUser(self) -> dict:
+    def GetFormattedUser(self) -> dict:
          return {str(self.id): {"ssn": self.ssn, "name": self.name, "is_member": self.is_member}}

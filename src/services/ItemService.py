@@ -5,11 +5,11 @@ import json, os
 
 class ItemService:
 
-    absolute_path = Utils.get_abs_path(ITEM_DB_PATH)
+    absolute_path = Utils.GetAbsPath(ITEM_DB_PATH)
 
     @staticmethod
     def GetItemByID(id: int) -> dict:
-        if not Utils.db_exists(ITEM_DB_PATH):
+        if not Utils.DbExists(ITEM_DB_PATH):
             print(f"Error: File not found at {ITEM_DB_PATH}")
             return {}
         try:
@@ -36,7 +36,6 @@ class ItemService:
         
     @staticmethod
     def RemoveItemByID(item_id: int) -> None:
-        """Removes an item from items.json by its ID."""
         if not os.path.exists(ItemService.absolute_path):
             print("Error: items.json does not exist.")
             return

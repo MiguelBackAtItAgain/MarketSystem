@@ -4,14 +4,13 @@ from utils.utils import Utils
 from utils.constants import INVENTORY_DOC_PATH, ITEM_DB_PATH
 from .ItemService import ItemService
 
-absolute_path = Utils.get_abs_path(INVENTORY_DOC_PATH)  
-items_path = Utils.get_abs_path(ITEM_DB_PATH)
+absolute_path = Utils.GetAbsPath(INVENTORY_DOC_PATH)  
+items_path = Utils.GetAbsPath(ITEM_DB_PATH)
 
-def load_items_from_inventory():
-    """Loads items from inventory.txt into items.json and clears the file after processing."""
+def LoadItemsFromInventory():
     if not os.path.exists(absolute_path):
         print(f"Inventory file '{absolute_path}' not found.")
-        return  
+        return
 
     try:
         with open(absolute_path, "r") as file:

@@ -1,9 +1,9 @@
-from utils.id_manager import generate_id
+from utils.id_manager import GenerateID
 
 class Item:
 
     def __init__(self, name: str, reg_price: float, member_price:float, tax_status:bool):
-        self.id = generate_id("item_id") 
+        self.id = GenerateID("item_id") 
         self.name = name
         self.reg_price = reg_price
         self.member_price = member_price

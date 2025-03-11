@@ -5,11 +5,11 @@ import json
 
 class UserService:
 
-    absolute_path = Utils.get_abs_path(USER_DB_PATH)
+    absolute_path = Utils.GetAbsPath(USER_DB_PATH)
 
     @staticmethod
     def GetUserByID(id: int) -> dict:
-        if Utils.db_exists(USER_DB_PATH):
+        if Utils.DbExists(USER_DB_PATH):
             try:
                 with open(UserService.absolute_path, 'r') as file:
                     content = json.load(file)
@@ -30,7 +30,7 @@ class UserService:
         if not UserService.UserExists(id):
             try:
                 user = User(id, ssn, name, is_member)
-                user_data = user.getFormattedUser()
+                user_data = user.GetFormattedUser()
                 with open(UserService.absolute_path, 'r') as file:
                     try:
                         users_data = json.load(file)
@@ -46,7 +46,6 @@ class UserService:
     
     @staticmethod
     def ToggleMembershipStatus(user_id: int) -> str:
-        """Toggles a user's membership status and updates the file."""
         try:
             with open(UserService.absolute_path, 'r') as file:
                 try:
@@ -57,10 +56,8 @@ class UserService:
             if str(user_id) not in users_data:
                 return f"Error: User with ID {user_id} not found."
 
-            # Toggle the `is_member` status
             users_data[str(user_id)]["is_member"] = not users_data[str(user_id)]["is_member"]
 
-            # Save the updated user data
             with open(UserService.absolute_path, 'w') as file:
                 json.dump(users_data, file, indent=4)
 
